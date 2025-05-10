@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 - Multiplayer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <div class="menu-button">
+            <button id="settingsBtn">⚙️ Settings</button>
+            <button id="tutorialBtn">❓ Tutorial</button>
+        </div>
+
+        <!-- Tutorial Overlay -->
+        <div class="tutorial-overlay">
+            <div class="tutorial-content">
+                <h2>How to Play 2048</h2>
+                <div class="tutorial-step">
+                    <h3>Step 1: Basic Controls</h3>
+                    <p>Use your keyboard arrows to move the tiles:</p>
+                    <ul>
+                        <li>↑ - Move Up</li>
+                        <li>↓ - Move Down</li>
+                        <li>← - Move Left</li>
+                        <li>→ - Move Right</li>
+                    </ul>
+                </div>
+                <div class="tutorial-step">
+                    <h3>Step 2: Tile Movement</h3>
+                    <p>Tiles slide in the direction you move them. When two tiles with the same number touch, they merge into one!</p>
+                </div>
+                <div class="tutorial-step">
+                    <h3>Step 3: Scoring</h3>
+                    <p>Each time tiles merge, you earn points equal to the new tile's value. Try to reach the 2048 tile!</p>
+                </div>
+                <button class="close-tutorial">Got it!</button>
+            </div>
+        </div>
+
+        <div class="settings-menu">
+            <h3>Game Settings</h3>
+            <div class="controls-section">
+                <h4>Controls</h4>
+                <div class="control-item">
+                    <label>Move Up:</label>
+                    <input type="text" id="upKey" value="ArrowUp">
+                </div>
+                <div class="control-item">
+                    <label>Move Down:</label>
+                    <input type="text" id="downKey" value="ArrowDown">
+                </div>
+                <div class="control-item">
+                    <label>Move Left:</label>
+                    <input type="text" id="leftKey" value="ArrowLeft">
+                </div>
+                <div class="control-item">
+                    <label>Move Right:</label>
+                    <input type="text" id="rightKey" value="ArrowRight">
+                </div>
+                <button id="saveControls">Save Controls</button>
+            </div>
+
+            <div class="music-section">
+                <h4>Music</h4>
+                <div class="music-controls">
+                    <button id="playPauseBtn">Play</button>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="10">
+                    <span id="volumeValue">10%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="multiplayer-controls">
+            <input type="text" id="playerName" placeholder="Enter your name">
+            <button id="createRoom">Create Room</button>
+            <button id="joinRoom">Join Room</button>
+            <input type="text" id="roomCode" placeholder="Room Code">
+        </div>
+        
+        <div class="game-info">
+            <div class="player-info">
+                <h3>Player 1</h3>
+                <div class="score-container">0</div>
+                <div class="best-container">0</div>
+            </div>
+            <div class="player-info">
+                <h3>Player 2</h3>
+                <div class="score-container">0</div>
+                <div class="best-container">0</div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+
+        <div class="game-message">
+            <p></p>
+            <button class="restart-button">New Game</button>
+        </div>
+    </div>
+    <audio id="gameMusic" loop>
+        <source src="https://www.youtube.com/watch?v=BEr9A2DCYWQ" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="game.js"></script>
+</body>
+</html>
